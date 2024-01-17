@@ -17,52 +17,54 @@ import com.yedam.app.emp.service.EmpVO;
 public class EmpTestController {
 	
 	@GetMapping("getTestEmp")
-	@ResponseBody // jsp∞° æ∆¥— µ•¿Ã≈Õ∏¶ π›»Ø
-	public EmpVO getEmpInfo(EmpVO vo) {
-		
-		EmpVO dd = new EmpVO();
-		dd.setEmployeeId(5555);
-		return dd;
+	@ResponseBody // JSPÍ∞Ä ÏïÑÎãå Îç∞Ïù¥ÌÑ∞Î•º Î∞òÌôò
+	public EmpVO getEmpInfo(EmpVO empVO) {
+		empVO.setEmployeeId(1000);
+		return empVO;
 	}
 	
 	@PostMapping("getTestEmp")
-	@ResponseBody // jsp∞° æ∆¥— µ•¿Ã≈Õ∏¶ π›»Ø
+	@ResponseBody // JSPÍ∞Ä ÏïÑÎãå Îç∞Ïù¥ÌÑ∞Î•º Î∞òÌôò
 	public EmpVO getEmpInfoPost(EmpVO empVO) {
 		empVO.setEmployeeId(9000);
 		return empVO;
 	}
 	
+
+	
 	@GetMapping("paramTestEmp")
 	@ResponseBody
-	public Map<String, Object> paramTestEmpGet(String lastName, Integer age) {
+	public Map<String, Object> 
+				paramTestEmpGet(String name, Integer age){
 		Map<String, Object> map = new HashMap<>();
-		map.put("name", lastName);
+		map.put("name", name);
 		map.put("age", age);
 		return map;
 	}
 	
 	@PostMapping("paramTestEmp")
 	@ResponseBody
-	public Map<String, Object> paramTestEmpPost(@RequestParam String lastName, @RequestParam(defaultValue = "10") Integer age) {
+	public Map<String, Object> 
+				paramTestEmpPost(@RequestParam String name, 
+				@RequestParam(defaultValue = "20") Integer age){
 		Map<String, Object> map = new HashMap<>();
-		map.put("name", lastName);
+		map.put("name", name);
 		map.put("age", age);
 		return map;
 	}
 	
-	// path≈◊Ω∫∫v
 	@GetMapping("pathTestEmp/{id}/{password}")
-	@ResponseBody // json
-	public Map<String,String> pathTestEmpGet(@PathVariable String id, @PathVariable(name ="password") String pwd) {
-		Map<String,String> object = new HashMap<>();
-		object.put("id", id);
-		object.put("pwd", pwd);
-		return object;
+	@ResponseBody
+	public String pathTestEmpGet(@PathVariable String id,
+					@PathVariable(name = "password") String pwd) {
+		return id;
 	}
 	
 	@PostMapping("jsonTestEmp")
-	@ResponseBody // json
-	public EmpVO jsonTestEmpGet(@RequestBody EmpVO empVO) {
+	@ResponseBody
+	public EmpVO jsonTestEmpPost(@RequestBody EmpVO empVO) {
+		empVO.setEmployeeId(9000);
 		return empVO;
 	}
+
 }

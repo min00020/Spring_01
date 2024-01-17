@@ -15,29 +15,25 @@ import com.yedam.app.emp.service.EmpVO;
 public class EmpServiceImpl implements EmpService {
 	
 	@Autowired
-	private EmpMapper empMapper;
-	
+	EmpMapper empMapper;
+
 	@Override
 	public List<EmpVO> getEmpAll() {
-		// TODO Auto-generated method stub
 		return empMapper.selectEmpList();
 	}
 
 	@Override
 	public EmpVO getEmpInfo(EmpVO empVO) {
-		// TODO Auto-generated method stub
 		return empMapper.selectEmpInfo(empVO);
 	}
 
 	@Override
 	public int insertEmpInfo(EmpVO empVO) {
-		// TODO Auto-generated method stub
-		
 		int result = empMapper.insertEmpInfo(empVO);
+		
 		if(result == 1) {
 			return empVO.getEmployeeId();
-		}
-		else {
+		}else {
 			return -1;
 		}
 	}
@@ -51,6 +47,7 @@ public class EmpServiceImpl implements EmpService {
 		if(result == 1) {
 			isSuccessed = true;
 		}
+		
 		map.put("result", isSuccessed);
 		map.put("target", empVO);
 		return map;
@@ -60,7 +57,7 @@ public class EmpServiceImpl implements EmpService {
 	public boolean deleteEmpInfo(int empId) {
 		int result = empMapper.deleteEmpInfo(empId);
 		
-		return result == 1? true : false;
+		return result == 1 ? true : false;
 	}
 
 }

@@ -24,14 +24,15 @@ public class MapperTest {
 	@Autowired
 	EmpMapper empMapper;
 	
+	//전체조회
 	//@Test
 	public void selectAll() {
 		List<EmpVO> list = empMapper.selectEmpList();
 		assertTrue(!list.isEmpty());
 	}
 	
-	//�떒嫄댁“�쉶
-	@Test
+	//단건조회
+	//@Test
 	public void selectInfo() {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmployeeId(100);
@@ -39,7 +40,7 @@ public class MapperTest {
 		assertEquals(findVO.getLastName(), "King");
 	}
 	
-	//�벑濡�
+	//등록
 	//@Test
 	public void insertInfo() {
 		EmpVO empVO = new EmpVO();
@@ -51,10 +52,9 @@ public class MapperTest {
 		
 		int result = empMapper.insertEmpInfo(empVO);
 		assertNotEquals(empVO.getEmployeeId(), 0);
-		//assertNotEquals(result, 0);
 	}
 	
-	//�닔�젙
+	//수정
 	//@Test
 	public void updateInfo() {
 		EmpVO empVO = new EmpVO();
@@ -65,7 +65,7 @@ public class MapperTest {
 		assertNotEquals(result, 0);
 	}
 	
-	//�닔�젙
+	//수정
 	//@Test
 	public void updateInfoDynamic() {
 		EmpVO empVO = new EmpVO();
@@ -75,7 +75,7 @@ public class MapperTest {
 		assertNotEquals(result, 0);
 	}
 	
-	//�궘�젣
+	//삭제
 	@Test
 	public void deleteInfo() {
 		int result = empMapper.deleteEmpInfo(207);

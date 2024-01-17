@@ -1,11 +1,15 @@
 package com.yedam.app.emp.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.emp.service.EmpService;
 import com.yedam.app.emp.service.EmpVO;
@@ -18,28 +22,71 @@ public class EmpController {
 	//@Autowired
 	//DeptService deptService;
 	
-	//GET  : ´Ü¼øÁ¶È¸, ºóÆäÀÌÁö
-	//POST : µ¥ÀÌÅÍ Á¶ÀÛ(µî·Ï, ¼öÁ¤, »èÁ¦)
+	//GET  : ì¡°íšŒ, ë¹ˆí˜ì´ì§€ í˜¸ì¶œ
+	//POST : ë°ì´í„° ì¡°ì‘(ë“±ë¡, ìˆ˜ì •, ì‚­ì œ)
 	
-	//ÀüÃ¼Á¶È¸
+	//ì „ì²´ì¡°íšŒ
 	@GetMapping("empList")
 	public String getEmpList(Model model) {
 		List<EmpVO> list = empService.getEmpAll();
-		model.addAttribute("empList",list);
-		
-		return "emp/empList"; //ÆäÀÌÁö¿¡ ´ëÇÑ Á¤º¸
+		model.addAttribute("empList", list);
+		return "emp/empList";
 	}
 	
+	//ì‚¬ì›ì¡°íšŒ
+	@GetMapping("empInfo")
+	public String getEmpInfo(EmpVO empVO, Model model) {
+		EmpVO findVO = empService.getEmpInfo(empVO);
+		model.addAttribute("empInfo", findVO);
+		return "emp/empInfo";
+	}
 	
-	//»ç¿øÁ¶È¸
+	//ì‚¬ì›ë“±ë¡ - FROM
+	@GetMapping("empInsert")
+	public String insertEmpInfoForm() {
+		return "emp/empInsert";
+	}
 	
-	//»ç¿øµî·Ï - FROM
-
-	//»ç¿øµî·Ï - PROCESS
+	//ì‚¬ì›ë“±ë¡ - PROCESS
+	@PostMapping("empInsert")
+	public String insertEmpInfoProcess(EmpVO empVO) {
+		int empId = empService.insertEmpInfo(empVO);
+		
+		String path = null;
+		if(empId > -1) {
+			path = "redirect:empInfo?employeeId="+empId;
+		}else {
+			path = "redirect:empList";
+		}
+		return path;
+	}
 	
-	//»ç¿ø¼öÁ¤ - PROCESS
+	//ì‚¬ì›ìˆ˜ì • - PROCESS : Ajax => @ResponseBody
+	//1) QueryString => ì»¤ë§¨ë“œ ê°ì²´
+	@PostMapping("empUpdate")
+	@ResponseBody
+	public Map<String, Object> empUpdateProcess(EmpVO empVO){
+		return empService.updateEmpInfo(empVO);
+	}
 	
-	//»ç¿ø»èÁ¦ - PROCESS
+	//2) JSON        => @RequestBody
+	@PostMapping("empUpdateAjax")
+	@ResponseBody
+	public Map<String, Object> empUpdateAjaxProcess
+								(@RequestBody EmpVO empVO){		
+		return empService.updateEmpInfo(empVO);
+	}
+	
+	//ì‚¬ì›ì‚­ì œ - PROCESS
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

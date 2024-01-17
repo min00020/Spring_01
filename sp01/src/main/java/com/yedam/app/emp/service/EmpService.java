@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 public interface EmpService {
-	//ÀüÃ¼Á¶È¸
+	//ì „ì²´ì¡°íšŒ
 	public List<EmpVO> getEmpAll();
 	
-	//´Ü°ÇÁ¶È¸
+	//ë‹¨ê±´ì¡°íšŒ
 	public EmpVO getEmpInfo(EmpVO empVO);
 	
-	//µî·Ï
+	//ë“±ë¡
 	public int insertEmpInfo(EmpVO empVO);
-	//¼öÁ¤
+	
+	//ìˆ˜ì •
 	public Map<String, Object> updateEmpInfo(EmpVO empVO);
-	//»èÁ¦
+	
+	//ì‚­ì œ
 	public boolean deleteEmpInfo(int empId);
 }

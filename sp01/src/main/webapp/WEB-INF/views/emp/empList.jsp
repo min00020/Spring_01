@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,19 +23,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<!--컨트롤러에서 넘겨받은 이름/ var:임시변수 -->
-			<c:forEach items="${empList}" var="info"> 
-				<tr>
-					<td></td> <!--  -->
-					<td>${info.employeeId}</td> <!-- info에 해당하는 객체(EmpVO)의 필드 사용하기 -->
+			<c:forEach items="${empList}" var="info" varStatus="sts">
+				<tr onclick="location.href='empInfo?employeeId=${info.employeeId}'">
+					<td>${sts.count }</td>
+					<td>${info.employeeId }</td>
 					<td>${info.lastName}</td>
 					<td>${info.email}</td>
-					<td>${info.hireDate}</td>
+					<td>
+						<fmt:formatDate value="${info.hireDate}" pattern="yyyy년MM월dd일"/>
+					</td>
 					<td>${info.jobId}</td>
 					<td>${info.salary}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<!-- JSP -> Servlet -> Java => html -> css -> javascript -->
 </body>
 </html>

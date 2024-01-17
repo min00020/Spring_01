@@ -7,26 +7,25 @@ import org.apache.ibatis.annotations.Param;
 import com.yedam.app.emp.service.EmpVO;
 
 public interface EmpMapper {
-	//ÀüÃ¼Á¶È¸
+	//ì „ì²´ì¡°íšŒ
 	public List<EmpVO> selectEmpList();
 	
-	//´Ü°ÇÁ¶È¸
-	public EmpVO selectEmpInfo(EmpVO empvo);
+	//ë‹¨ê±´ì¡°íšŒ
+	public EmpVO selectEmpInfo(EmpVO empVO);
 	
-	//µî·Ï
+	//ë“±ë¡
 	public int insertEmpInfo(EmpVO empVO);
 	
-	//¼öÁ¤
+	//ìˆ˜ì •
 	public int updateEmpInfo(EmpVO empVO);
 	
-	//»èÁ¦
+	//ì‚­ì œ
 	public int deleteEmpInfo(int empId);
 	
-	//¼öÁ¤ : º¯°æµÈ µ¥ÀÌÅÍ¸¸ ¼öÁ¤
+	//ìˆ˜ì • : ë³€ê²½ëœ ë°ì´í„°ë§Œ ìˆ˜ì •
 	public int updateEmpInfoDynamic(EmpVO empVO);
 	
-	//¼öÁ¤ : ¸Å°³º¯¼ö°¡ µÎ°³ÀÎ°æ¿ì
-	public int updateEmpsal(@Param("eid") int empId, 
+	//ìˆ˜ì • : ë§¤ê°œë³€ìˆ˜ê°€ ë‘ê°œì¸ê²½ìš°
+	public int updateEmpSal(@Param("eid") int empId, 
 							@Param("info") EmpVO empVO);
-	
 }
